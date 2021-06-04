@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Antiochia Kitűzők</title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+</style>
+<style type="text/css">
+
+#page{
+        width: 21cm; 
+        height: 29.7cm; 
+        margin: 0mm 0mm 0mm 0mm; 
+}
+
+	.pagebreak{
+		display: block;
+		page-break-after: always;
+	}
+	
+	.fullname{
+		font-size: 150%;
+		font-family: 'Dancing Script', cursive;
+	}
+	
+	.bece{
+		font-size: 300%;
+		font-family: 'Dancing Script', cursive;
+		font-weight: bold;
+	}
+	
+	.csoport{
+		font-size: 150%;
+		font-family: 'Dancing Script', cursive;
+		}
+
+
+</style>
+<body>
+
+	<div id="page">
+
+	</div>
+</body>
+<script type="text/javascript">
+
+
+
+	let page=document.getElementById("page");
+	const TableMaxPixels=page.offsetHeight;
+	let table=document.createElement('table');
+	table.setAttribute('border', '1');
+	table.style.width = '100%';
+	let tbody=document.createElement('tbody');
+	
+	for(let i=0;i<50;++i){
+		let tableRow=document.createElement('tr');
+		for(let col=0;col<2;++col){
+			let td1=document.createElement('td');
+			td1.innerHTML+=`
+				<table width="100%">
+					<tr>
+						<td>
+							<div class="fullname">Sisa Katalin</div>
+						</td>
+						<td rowspan="3" width="100px">
+							<img src="https://drive.google.com/uc?export=download&id=11QozhQMt1wBeh-QgO43xN4-xsgXU5w97" alt="" border="0" align="left" width="" height="200px" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="bece">Árvíztűrő ütvefúró</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="csoport">6A</div>
+						</td>
+					</tr>
+				</table>
+			`;
+			tableRow.appendChild(td1);
+			}
+		tbody.appendChild(tableRow);
+		table.appendChild(tbody);
+		page.appendChild(table);
+		console.log("table clientHeight:"+table.clientHeight);
+		console.log("table offsetHeight:"+table.offsetHeight);
+		
+		if(table.offsetHeight>TableMaxPixels){
+			tbody.removeChild(tableRow);
+			let pagebreak=document.createElement('div');
+			pagebreak.setAttribute("class","pagebreak");
+			page.appendChild(pagebreak);
+			table=document.createElement('table');
+			table.setAttribute('border', '1');
+			table.style.width = '100%';
+			tbody=document.createElement('tbody');
+			tbody.appendChild(tableRow);
+			table.appendChild(tbody);
+			page.appendChild(table);		
+		}
+	}
+
+
+
+	console.log("page clientHeight:"+page.clientHeight);
+	console.log("page offsetHeight:"+page.offsetHeight);	
+</script>
+</html>
