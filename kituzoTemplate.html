@@ -49,7 +49,8 @@
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const myParam = urlParams.get('data');
-	const data=JSON.parse(window.atob(myParam));
+	const decode=decodeUnicode(myParam);
+	const data=JSON.parse(decode);
 	
 	console.log(JSON.stringify(data));
 	
@@ -110,5 +111,13 @@
 		}
 	}
 	window.print();
+	
+	
+	function decodeUnicode(str) {
+ 	 // Going backwards: from bytestream, to percent-encoding, to original string.
+  		return decodeURIComponent(atob(str).split('').map(function (c) {
+    		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  		}).join(''));
+	}
 </script>
 </html>
