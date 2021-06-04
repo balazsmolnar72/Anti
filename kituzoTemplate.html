@@ -62,7 +62,7 @@
 	
 	for(let i=0;i<data.length;++i){
 		let tableRow=document.createElement('tr');
-		for(let col=0;col<2;++col){
+		for(let col=0;col<2 && i<data.length;++col,++i){
 			let td1=document.createElement('td');
 			td1.innerHTML+=`
 				<table width="100%">
