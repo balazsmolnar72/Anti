@@ -46,7 +46,12 @@
 <script type="text/javascript">
 
 
-
+	const urlParams = new URLSearchParams(window.location.search);
+	const myParam = urlParams.get('data');
+	const d=JSON.parse(window.atob(myParam));
+	
+	console.log(JSON.stringify(d));
+	
 	let page=document.getElementById("page");
 	const TableMaxPixels=page.offsetHeight;
 	let table=document.createElement('table');
@@ -102,11 +107,6 @@
 			page.appendChild(table);		
 		}
 	}
-
-
-
-	console.log("page clientHeight:"+page.clientHeight);
-	console.log("page offsetHeight:"+page.offsetHeight);
 	window.print();
 </script>
 </html>
