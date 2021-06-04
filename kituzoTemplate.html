@@ -49,7 +49,7 @@
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const myParam = urlParams.get('data');
-	const d=JSON.parse(window.atob(myParam));
+	const data=JSON.parse(window.atob(myParam));
 	
 	console.log(JSON.stringify(d));
 	
@@ -60,7 +60,7 @@
 	table.style.width = '100%';
 	let tbody=document.createElement('tbody');
 	
-	for(let i=0;i<50;++i){
+	for(let i=0;i<data.length;++i){
 		let tableRow=document.createElement('tr');
 		for(let col=0;col<2;++col){
 			let td1=document.createElement('td');
@@ -68,7 +68,7 @@
 				<table width="100%">
 					<tr>
 						<td>
-							<div class="fullname">Sisa Katalin</div>
+							<div class="fullname">`+data[i].nev+`</div>
 						</td>
 						<td rowspan="3" width="100px">
 							<img src="https://drive.google.com/uc?export=download&id=11QozhQMt1wBeh-QgO43xN4-xsgXU5w97" alt="" border="0" align="left" width="" height="200px" />
@@ -76,12 +76,12 @@
 					</tr>
 					<tr>
 						<td>
-							<div class="bece">Árvíztűrő ütvefúró</div>
+							<div class="bece">`+data[i].bece+`</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<div class="csoport">6A</div>
+							<div class="csoport">`+data[i].alvoCsop+data[i].kisCsop+`</div>
 						</td>
 					</tr>
 				</table>
