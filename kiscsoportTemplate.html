@@ -59,15 +59,15 @@
 	const decode=decodeUnicode(myParam);
 	const data=JSON.parse(decode);
 
-	data=[{
-		csoport:1,
-		vezeto:"Korcsma Eszter",
-		tagok:[
-			{nev:"Fehér Dániel",regenc:false},
-			{nev:"Tarnóczi Petra Mária",regenc:false},
-			{nev:"Wijnands Margit",regenc:true},
-			{nev:"Szijártó Cecilia",regenc:true},			
-		]}];
+//	data=[{
+//		csoport:1,
+//		vezeto:"Korcsma Eszter",
+//		tagok:[
+//			{nev:"Fehér Dániel",regenc:false},
+//			{nev:"Tarnóczi Petra Mária",regenc:false},
+//			{nev:"Wijnands Margit",regenc:true},
+//			{nev:"Szijártó Cecilia",regenc:true},			
+//		]}];
 	
 	console.log(JSON.stringify(data));
 	
@@ -78,20 +78,20 @@
 	table.style.width = '100%';
 	let tbody=document.createElement('tbody');
 	
-	for(let i=0;i<15;){
+	for(let i=0;i<data.length;){
 		let tableRow=document.createElement('tr');
-		for(let col=0;col<2 && i<15;++col,++i){
+		for(let col=0;col<2 && i<data.length;++col,++i){
 			let td1=document.createElement('td');
 			td1.style.width='50%';
 			td1.style.verticalAlign = "top";;
 			td1.innerHTML+=`
-				<div class="vezetoNev">`+data[0].csoport+`. `+data[0].vezeto+`</div>
+				<div class="vezetoNev">`+data[i].csoport+`. `+data[i].vezeto+`</div>
 			`;
-			for(let tag=0;tag<data[0].tagok.length;++tag){
-				if(data[0].tagok[tag].regenc){
-					td1.innerHTML+='<div class="regenc">'+data[0].tagok[tag].nev+'</div>';
+			for(let tag=0;tag<data[i].tagok.length;++tag){
+				if(data[i].tagok[tag].regenc){
+					td1.innerHTML+='<div class="regenc">'+data[i].tagok[tag].nev+'</div>';
 				}else{
-					td1.innerHTML+='<div class="ujonc">'+data[0].tagok[tag].nev+'</div>';
+					td1.innerHTML+='<div class="ujonc">'+data[i].tagok[tag].nev+'</div>';
 				}
 			}
 			
