@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Antiochia Kitűzők</title>
+</head>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+</style>
+<style type="text/css">
+
+#page{
+        width: 21cm; 
+        height: 29.7cm; 
+        margin: 0mm 0mm 0mm 0mm; 
+}
+
+	.pagebreak{
+		display: block;
+		page-break-after: always;
+	}
+	
+	.vezetoNev{
+		font-size: 200%;
+		font-family: 'Dancing Script', cursive;
+		font-weight: bold;
+		vertical-align: top;
+		background-color: grey;
+		color: white;
+		-webkit-print-color-adjust: exact;
+	}
+	
+	.regenc{
+		font-size: 180%;
+		font-family: 'Dancing Script', cursive;
+		font-weight: bold;
+		vertical-align: top;
+	}
+	
+	.ujonc{
+		font-size: 180%;
+		font-family: 'Dancing Script', cursive;
+		vertical-align: top;
+		}
+
+
+</style>
+<body>
+
+	<div id="page">
+
+	</div>
+</body>
+<script type="text/javascript">
+
+
+	const urlParams = new URLSearchParams(window.location.search);
+	const myParam = urlParams.get('data');
+	const decode=decodeUnicode(myParam);
+	const data=JSON.parse(decode);
+
+	data=[{
+		csoport:1,
+		vezeto:"Korcsma Eszter",
+		tagok:[
+			{nev:"Fehér Dániel",regenc:false},
+			{nev:"Tarnóczi Petra Mária",regenc:false},
+			{nev:"Wijnands Margit",regenc:true},
+			{nev:"Szijártó Cecilia",regenc:true},			
+		]}];
+	
+	console.log(JSON.stringify(data));
+	
+	let page=document.getElementById("page");
+	const TableMaxPixels=page.offsetHeight;
+	let table=document.createElement('table');
+	table.setAttribute('border', '1');
+	table.style.width = '100%';
+	let tbody=document.createElement('tbody');
+	
+	for(let i=0;i<15;){
+		let tableRow=document.createElement('tr');
+		for(let col=0;col<2 && i<15;++col,++i){
+			let td1=document.createElement('td');
+			td1.style.width='50%';
+			td1.style.verticalAlign = "top";;
+			td1.innerHTML+=`
+				<div class="vezetoNev">`+data[0].csoport+`. `+data[0].vezeto+`</div>
+			`;
+			for(let tag=0;tag<data[0].tagok.length;++tag){
+				if(data[0].tagok[tag].regenc){
+					td1.innerHTML+='<div class="regenc">'+data[0].tagok[tag].nev+'</div>';
+				}else{
+					td1.innerHTML+='<div class="ujonc">'+data[0].tagok[tag].nev+'</div>';
+				}
+			}
+			
+			tableRow.appendChild(td1);
+			}
+		tbody.appendChild(tableRow);
+		table.appendChild(tbody);
+		page.appendChild(table);
+		//console.log("table clientHeight:"+table.clientHeight);
+		//console.log("table offsetHeight:"+table.offsetHeight);
+		
+		if(table.offsetHeight>TableMaxPixels){
+			tbody.removeChild(tableRow);
+			let pagebreak=document.createElement('div');
+			pagebreak.setAttribute("class","pagebreak");
+			page.appendChild(pagebreak);
+			table=document.createElement('table');
+			table.setAttribute('border', '1');
+			table.style.width = '100%';
+			tbody=document.createElement('tbody');
+			tbody.appendChild(tableRow);
+			table.appendChild(tbody);
+			page.appendChild(table);		
+		}
+	}
+	window.print();
+	
+	
+	function decodeUnicode(str) {
+ 	 // Going backwards: from bytestream, to percent-encoding, to original string.
+  		return decodeURIComponent(atob(str).split('').map(function (c) {
+    		return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  		}).join(''));
+	}
+</script>
+</html>
