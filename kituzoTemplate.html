@@ -29,7 +29,6 @@
 		font-size: 500%;
 		font-family: 'Dancing Script', cursive;
 		font-weight: bold;
-		overflow: hidden;
 	}
 	
 	.csoport{
@@ -69,7 +68,7 @@
 			td1.style.width='50%';
 			td1.style.overflow='hidden';
 			td1.innerHTML+=`
-				<table width="100%">
+				<table width="100%" style="overflow:'hidden'">
 					<tr>
 						<td>
 							<div class="fullname">`+data[i].nev+`</div>
@@ -79,7 +78,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td style="overflow:'hidden'">
 							<div class="bece">`+data[i].bece+`</div>
 						</td>
 					</tr>
