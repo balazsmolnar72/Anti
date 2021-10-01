@@ -62,7 +62,7 @@
 	table.style.tableLayout='fixed';
 	let tbody=document.createElement('tbody');
 	
-	for(let i=0;i<data.length;++i){
+	for(let i=0;i<data.length;){
 		let tableRow=document.createElement('tr');
 		for(let col=0;col<2 && i<data.length;++col,++i){
 			let td1=document.createElement('td');
